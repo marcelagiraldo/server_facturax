@@ -17,14 +17,14 @@ export async function createProduct(codigo, descripcion, precio_venta, impuesto_
     return { message: 'Producto creado exitosamente' };
 }
 
-export async function updateClient(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk) {
+export async function updateProduct(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk) {
     const query = 'call proyecto.modificar_productos($1,$2,$3,$4,$5,$6)'
     const values = [codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk]
     const result = await pool.query(query, values)
     return result.rows[0]
 }
 
-export async function deleteClient(codigo) {
+export async function deleteProduct(codigo) {
     await pool.query('call proyecto.eliminar_productos($1)',[codigo]);
     return { message: 'Producto eliminado exitosamente' };
 };

@@ -25,6 +25,6 @@ export async function updateTaxe(identificacion,nombre,porcentaje) {
 }
 
 export async function deleteTaxe(codigo) {
-    await pool.query('call proyecto.eliminar_productos($1)',[codigo]);
-    return { message: 'Producto eliminado exitosamente' };
+    await pool.query('call proyecto.eliminar_impuestos($1)',[codigo]);
+    return { message: 'Impuesto eliminado exitosamente' };
 };

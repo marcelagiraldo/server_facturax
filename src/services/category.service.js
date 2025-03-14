@@ -1,11 +1,11 @@
 import pool from "../config/db.js"
 
-export async function getCategory() {
-    const result = await pool.query('SELECT * FROM proyecto.obtener_clientes()');
+export async function getCategories() {
+    const result = await pool.query('SELECT * FROM proyecto.obtener_categorias()');
     return result.rows;
 };
 
-export async function getCategoryById(id) {
+/* export async function getCategoryById(id) {
     const result = await pool.query(`select * from proyecto.obtener_cliente($1)`, [id])
     return result.rows[0]
 }
@@ -28,3 +28,4 @@ export async function deleteClient(id) {
     await pool.query('call proyecto.eliminar_clientes($1)',[id]);
     return { message: 'Cliente eliminado exitosamente' };
 };
+ */
