@@ -21,7 +21,7 @@ export const postUserController = async (req, res, next) => {
             return res.status(400).json({ error: 'Todos los campos son obligatorios' });
         }
         const oldUser = await getUsertById(documento)
-        
+
         if (oldUser){
             return res.send({data:'El usuario ya existe'})
         }
@@ -54,10 +54,12 @@ export const loginUser = async (req, res, next) => {
         const passwordMatch = await bcrypt.compare(password, user.contraseia_);
         if (!passwordMatch) return res.status(400).json({ error: "Contraseña incorrecta" });
 
-        res.json({ message: "Login exitoso" });
+        res.json({ success: true, token: "aquí_va_el_token",
+            user:{nombre:user.nombre_,documento:user.documento_,apellido:user.apellido_,email:user.email_,telefono:user.telefono_,contraseia:user.contraseia_},
+             message: "Login exitoso" });
     } catch (err) {
         console.error("Error en el login:", err);
-        res.status(500).json({ error: "Error en el login", detalle: err.message });
+        res.status(500).json({ error: "Error en el login",detalle: err.message });
     }
 }
 
