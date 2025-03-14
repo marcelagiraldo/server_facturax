@@ -6,10 +6,23 @@ export async function getUsertById(id) {
 }
 
 export async function createUser(documento, nombre, apellido, email, telefono, contraseia) {
-    const query = 'call proyecto.crear_usuario($1,$2,$3,$4,$5,$6)'
+    const query = `
+        INSERT INTO proyecto.users (id, documento, nombre, apellido, email, telefono, contraseia)
+        VALUES (nextval('proyecto.codigo_user'), $1, $2, $3, $4, $5, $6) RETURNING *;
+    `
     const values = [documento, nombre, apellido, email, telefono, contraseia]
-    await pool.query(query, values)
-    return { message: 'Usuario creado exitosamente' };
+    try {
+        console.log("Ejecutando consulta SQL:", query);
+        console.log("Valores enviados:", values);
+        const result = await pool.query(query, values);
+        console.log('Pool ejecutandose');
+        
+        console.log(result);        
+        return { message: 'Usuario creado exitosamente' };
+    } catch (error) {
+        console.error("Error al crear usuario:", error);
+        return { error: "Error al crear usuario",  detalle: err.message  };
+    }
 }
 
 export async function updateUser(documento, nombre, apellido, email, telefono, contraseia) {
