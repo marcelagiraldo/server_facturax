@@ -13,6 +13,13 @@ import cors from 'cors'
 
 const app = express();
 
+const PORT = process.env.PORT || 3006;
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+
 app.use(cors())
 app.use(express.json());
 app.use('/clientes', clientRoutes);

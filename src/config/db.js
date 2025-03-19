@@ -9,7 +9,7 @@ const pool = new Pool({
     user:'postgres',
     password:'AutonomaSQL123.',
     database:'facturaya',
-    host:'localhost',
+    host: '127.0.0.1',
     port:'5432'
 })
 
