@@ -1,16 +1,11 @@
-import pkg from 'pg';
-import dotenv from 'dotenv';
+import pg from 'pg'
+import {config} from 'dotenv';
 
-dotenv.config();
+config();
 
-const { Pool } = pkg;
-
-const pool = new Pool({
-    user:'postgres',
-    password:'AutonomaSQL123.',
-    database:'facturaya',
-    host: '127.0.0.1',
-    port:'5432'
+const pool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
 })
 
 pool.connect((err,Connection)=>{

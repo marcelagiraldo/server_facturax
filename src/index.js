@@ -7,7 +7,7 @@ import paymentMethodRoutes from './routes/payment.method.router.js'
 import productRoutes from './routes/products.router.js'
 import taxesRoutes from './routes/taxes.router.js'
 import userRoutes from './routes/user.router.js'
-
+import pool from './config/db.js'
 import {errorHandler} from './middleware/errorHandler.js'
 import cors from 'cors'
 
@@ -22,6 +22,16 @@ app.listen(PORT, () => {
 
 app.use(cors())
 app.use(express.json());
+
+app.get('/',(req,res)=>{
+  res.send('Hello world')
+})
+
+app.get('/ping', async(req,res)=>{
+  const result = await pool.query('SELECT NOW()')
+  return res.json(result.rows[0])
+})
+
 app.use('/clientes', clientRoutes);
 app.use('/categorias', categoryRoutes);
 app.use('/facturas', invoiceRoutes);
