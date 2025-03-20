@@ -24,7 +24,7 @@ app.use(cors())
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-  res.send('Hello world')
+  res.send('Hola mundo')
 })
 
 app.get('/ping', async(req,res)=>{
