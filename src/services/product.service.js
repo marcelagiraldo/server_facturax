@@ -10,9 +10,9 @@ export async function getProductById(codigo) {
     return result.rows[0]
 }
 
-export async function createProduct(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk) {
-    const query = 'call proyecto.crear_productos($1,$2,$3,$4,$5,$6)'
-    const values = [codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk]
+export async function createProduct(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk,user_id) {
+    const query = 'call proyecto.crear_productos($1,$2,$3,$4,$5,$6,$7)'
+    const values = [codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk,user_id]
     await pool.query(query, values)
     return { message: 'Producto creado exitosamente' };
 }

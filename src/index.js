@@ -23,8 +23,12 @@ app.listen(PORT, () => {
 app.use(cors())
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-  res.send('Hola mundo')
+app.get('/', async (req,res)=>{
+  console.log('Start');
+  const result = await pool.query("SELECT current_database()")
+  console.log('End');
+  res.send(`El nombre de la base de datos es: ${result.rows[0].current_database}`)
+  
 })
 
 app.get('/ping', async(req,res)=>{

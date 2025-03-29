@@ -23,13 +23,13 @@ export const getProductByIdController = async (req, res, next) => {
 
 export const postProductController = async (req, res, next) => {
     try {
-        const { codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk } = req.body;
+        const { codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk,user_id } = req.body;
 
-        if (!codigo || !descripcion || !precio_venta || !impuesto_id_fk || !medida || !categoria_id_fk) {
+        if (!codigo || !descripcion || !precio_venta || !impuesto_id_fk || !medida || !categoria_id_fk || user_id) {
             return res.status(400).json({ error: 'Todos los campos son obligatorios' });
         }
 
-        const resultado = await createProduct(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk);
+        const resultado = await createProduct(codigo, descripcion, precio_venta, impuesto_id_fk, medida, categoria_id_fk,user_id);
         res.status(201).json(resultado);
     } catch (error) {
         next(error);
